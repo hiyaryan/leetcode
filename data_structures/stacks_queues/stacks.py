@@ -67,7 +67,33 @@ class Stack:
         return True if self.length == 0 else False
 
 
+class ArrayStack:
+    def __init__(self, value=[]):
+        self.stack = value
+
+    def peek(self):
+        if self.is_empty():
+            print("Stack is empty.\n")
+
+        else:
+            print(f"{len(self.stack)}: {self.stack[len(self.stack) - 1]}\n")
+
+    def push(self, value):
+        self.stack.append(value)
+
+    def pop(self):
+        if self.is_empty():
+            print("Nothing to pop from stack.\n")
+
+        else:
+            return self.stack.pop()
+
+    def is_empty(self):
+        return True if len(self.stack) == 0 else False
+
+
 def main():
+    # Stack as a Linked List
     print("COMMAND: new stack.")
     stack = Stack()
     print(stack.bottom, end="\n\n")
@@ -116,6 +142,56 @@ def main():
 
     print("COMMAND: is empty")
     print(stack.is_empty(), end="\n\n")
+
+    # Stack as a list (or array)
+    print("COMMAND: new array_stack.")
+    array_stack = ArrayStack()
+    print(array_stack.stack, end="\n\n")
+
+    print("COMMAND: is empty")
+    print(array_stack.is_empty(), end="\n\n")
+
+    print("COMMAND: peek")
+    array_stack.peek()
+
+    print("COMMAND: pop")
+    array_stack.pop()
+
+    print("COMMAND: push google && peek")
+    array_stack.push("google")
+    array_stack.peek()
+
+    print("COMMAND: push Udemy && peek")
+    array_stack.push("Udemy")
+    array_stack.peek()
+
+    print("COMMAND: push Discord && peek")
+    array_stack.push("Discord")
+    array_stack.peek()
+
+    print("COMMAND: is empty")
+    print(array_stack.is_empty(), end="\n\n")
+
+    print("COMMAND: pop")
+    print(array_stack.pop())
+    array_stack.peek()
+
+    print("COMMAND: pop")
+    print(array_stack.pop())
+    array_stack.peek()
+
+    print("COMMAND: pop")
+    print(array_stack.pop())
+    array_stack.peek()
+
+    print("COMMAND: pop")
+    array_stack.pop()
+
+    print("COMMAND: peek")
+    array_stack.peek()
+
+    print("COMMAND: is empty")
+    print(array_stack.is_empty(), end="\n\n")
 
 
 if __name__ == "__main__":
