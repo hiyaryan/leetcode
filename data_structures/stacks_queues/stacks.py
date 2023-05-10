@@ -37,23 +37,15 @@ class Stack:
         """
         Add a node to the top of the stack.
         """
-
         new_node = Node(value)
 
-        # first node on stack is top and bottom
         if self.is_empty():
             self.top = new_node
             self.bottom = new_node
 
-        # if the length is 2 then the nodes next is the current top then the new top is the new node
-        elif self.length > 1:
+        else:
             new_node.next = self.top
             self.top = new_node
-
-        # if the length is 1 the next node is the top pointing to the bottom
-        else:
-            self.top = new_node
-            self.top.next = self.bottom
 
         self.length += 1
 
@@ -61,11 +53,14 @@ class Stack:
         if self.is_empty():
             print("Nothing to pop from stack.\n")
 
-        # top is pointing to next item, set next item as new top
         else:
             popped_value = self.top.value
             self.top = self.top.next
             self.length -= 1
+
+            if self.length == 0:
+                self.bottom = None
+
             return popped_value
 
     def is_empty(self):
