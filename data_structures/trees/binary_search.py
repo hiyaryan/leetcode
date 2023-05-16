@@ -59,16 +59,38 @@ class BinarySearchTree:
                 parent_node.right = Node(value)
 
     def lookup(self, value):
-        pass
+        next_node = self.root
+
+        while next_node:
+            # get the left child if value is less than parent value
+            if value < next_node.value:
+                next_node = next_node.left
+
+            # get the right child is value is greater than parent value
+            elif value > next_node.value:
+                next_node = next_node.right
+
+            # otherwise return the parent which is the lookup value
+            else:
+                return next_node
+
+        # no lookup value found
+        return None
 
     def remove(self, value):
         pass
 
 
 def traverse(node):
-    tree = {"value": node.value}
-    tree["left"] = None if not node.left else traverse(node.left)
-    tree["right"] = None if not node.right else traverse(node.right)
+    parent_value = getattr(node, "value", None)
+    tree = {"value": parent_value}
+
+    left_child = getattr(node, "left", None)
+    tree["left"] = None if not left_child else traverse(left_child)
+
+    right_child = getattr(node, "right", None)
+    tree["right"] = None if not right_child else traverse(right_child)
+
     return tree
 
 
@@ -88,6 +110,12 @@ def main():
 
     json_tree = json.dumps(traverse(tree.root))
     print(json_tree)
+
+    # lookup 20, 6, 3, and 25
+    print(json.dumps(traverse(tree.lookup(20))))
+    print(json.dumps(traverse(tree.lookup(6))))
+    print(json.dumps(traverse(tree.lookup(3))))
+    print(json.dumps(traverse(tree.lookup(25))))
 
 
 if __name__ == "__main__":
